@@ -1,0 +1,470 @@
+@import url("https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&family=Playfair+Display:wght@600;700&display=swap");
+
+:root {
+    color-scheme: light;
+    font-family: "DM Sans", sans-serif;
+    color: #54233f;
+    background: #fff3f8;
+    font-synthesis: none;
+    text-rendering: optimizeLegibility;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+}
+
+* {
+    box-sizing: border-box;
+}
+
+body {
+    min-width: 320px;
+    min-height: 100vh;
+    margin: 0;
+}
+
+button {
+    font: inherit;
+}
+
+.page-shell {
+    position: relative;
+    display: grid;
+    min-height: 100vh;
+    min-height: 100svh;
+    place-items: center;
+    overflow: hidden;
+    padding: 48px 20px 28px;
+    background:
+        radial-gradient(ellipse at 10% 20%, rgba(255, 185, 215, 0.55), transparent 34%),
+        radial-gradient(ellipse at 90% 82%, rgba(255, 205, 230, 0.62), transparent 32%),
+        #fff3f8;
+}
+
+.birthday-card {
+    position: relative;
+    z-index: 1;
+    width: min(100%, 450px);
+    padding: 34px 38px 36px;
+    border: 1px solid rgba(207, 89, 146, 0.16);
+    border-radius: 28px;
+    background: rgba(255, 255, 255, 0.9);
+    box-shadow: 0 24px 70px rgba(155, 62, 111, 0.16);
+    text-align: center;
+    animation: card-appear 550ms ease-out both;
+}
+
+.eyebrow {
+    margin: 0 0 10px;
+    color: #ce4f8b;
+    font-size: 0.75rem;
+    font-weight: 700;
+    letter-spacing: 0.16em;
+    text-transform: uppercase;
+}
+
+h1,
+h2,
+p {
+    margin-top: 0;
+}
+
+h1,
+.result-panel h2 {
+    font-family: "Playfair Display", Georgia, serif;
+}
+
+h1 {
+    margin-bottom: 8px;
+    color: #642847;
+    font-size: clamp(2.3rem, 8vw, 3rem);
+    line-height: 1.15;
+}
+
+h1 span {
+    display: inline-block;
+    font-family: "DM Sans", sans-serif;
+    font-size: 0.7em;
+    vertical-align: 0.08em;
+}
+
+.intro {
+    margin-bottom: 25px;
+    color: #895c75;
+    font-size: 0.98rem;
+}
+
+.progress-area {
+    display: flex;
+    justify-content: space-between;
+    margin: 0 0 24px;
+    color: #8a6077;
+    font-size: 0.78rem;
+    font-weight: 600;
+}
+
+.question-emoji,
+.result-emoji {
+    display: block;
+    margin-bottom: 13px;
+    font-size: 2.25rem;
+}
+
+#question-title {
+    margin-bottom: 8px;
+    color: #642847;
+    font-family: "Playfair Display", Georgia, serif;
+    font-size: clamp(1.45rem, 5vw, 1.8rem);
+    font-style: italic;
+    line-height: 1.3;
+}
+
+.question-hint {
+    margin-bottom: 22px;
+    color: #9a7188;
+    font-size: 0.88rem;
+}
+
+.answer-list {
+    position: relative;
+    display: flex;
+    min-height: 132px;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: 12px;
+}
+
+.answer-button {
+    min-height: 44px;
+    border: 1px solid #f1cddd;
+    border-radius: 14px;
+    background: linear-gradient(135deg, #f18ab5, #e9639e);
+    color: #fff;
+    cursor: pointer;
+    font-size: 0.95rem;
+    font-weight: 600;
+    transition: border-color 160ms ease, background 160ms ease, transform 160ms ease;
+}
+
+.answer-button[data-answer="yes"] {
+    width: min(100%, 190px);
+}
+
+.answer-button[data-answer="no"] {
+    width: min(100%, 120px);
+    min-height: 38px;
+    font-size: 0.85rem;
+}
+
+.answer-button.is-escaping {
+    position: absolute;
+    z-index: 1;
+    transition: left 120ms ease, top 120ms ease, border-color 160ms ease, background 160ms ease;
+}
+
+.answer-button:hover,
+.answer-button:focus-visible {
+    transform: translateY(-2px);
+    border-color: #d94c88;
+    outline: none;
+    background: linear-gradient(135deg, #e76b9f, #d94c88);
+}
+
+.answer-button:focus-visible {
+    outline: 3px solid rgba(206, 79, 139, 0.32);
+    outline-offset: 3px;
+}
+
+.answer-button:active {
+    transform: scale(0.985);
+}
+
+.result-panel {
+    animation: card-appear 450ms ease-out both;
+}
+
+.poem-reveal {
+    position: relative;
+    overflow: hidden;
+    padding: 8px 0;
+}
+
+.poem-content {
+    position: relative;
+    z-index: 0;
+}
+
+.curtain {
+    position: absolute;
+    z-index: 1;
+    top: 0;
+    bottom: 0;
+    width: 50%;
+    background:
+        repeating-linear-gradient(
+            90deg,
+            rgba(255, 255, 255, 0.16) 0,
+            rgba(255, 255, 255, 0.16) 5px,
+            transparent 5px,
+            transparent 14px
+        ),
+        linear-gradient(110deg, #e85d98, #cf397d);
+    box-shadow: inset 0 0 24px rgba(112, 26, 72, 0.18);
+    transition: transform 1.25s cubic-bezier(0.7, 0, 0.2, 1);
+}
+
+.curtain-left {
+    left: 0;
+    border-right: 2px solid rgba(255, 222, 237, 0.75);
+}
+
+.curtain-right {
+    right: 0;
+    border-left: 2px solid rgba(255, 222, 237, 0.75);
+}
+
+.poem-reveal.is-opening .curtain-left {
+    transform: translateX(-101%);
+}
+
+.poem-reveal.is-opening .curtain-right {
+    transform: translateX(101%);
+}
+
+.result-emoji {
+    margin: 2px 0 15px;
+    font-size: 3rem;
+}
+
+.result-panel h2 {
+    margin-bottom: 16px;
+    color: #642847;
+    font-size: clamp(1.9rem, 7vw, 2.4rem);
+    line-height: 1.2;
+}
+
+.result-message {
+    margin-bottom: 18px;
+    color: #d94c88;
+    font-size: 1rem;
+    line-height: 1.75;
+    white-space: pre-line;
+}
+
+.love-emojis {
+    color: #d94c88;
+    font-size: 1.7rem;
+    letter-spacing: 0.14em;
+    animation: heart-beat 1.4s ease-in-out infinite;
+}
+
+.sparkle {
+    position: absolute;
+    z-index: 0;
+    color: #eb80ae;
+    pointer-events: none;
+    animation: twinkle 2.5s ease-in-out infinite;
+}
+
+.sparkle-one {
+    top: 15%;
+    left: 17%;
+    font-size: 2rem;
+}
+
+.sparkle-two {
+    top: 27%;
+    right: 16%;
+    color: #db91a2;
+    font-size: 2.5rem;
+    animation-delay: 600ms;
+}
+
+.sparkle-three {
+    right: 20%;
+    bottom: 16%;
+    font-size: 1.5rem;
+    animation-delay: 1.1s;
+}
+
+.love-heart {
+    position: absolute;
+    z-index: 0;
+    color: #e66b9f;
+    font-size: clamp(1.5rem, 3vw, 2.2rem);
+    line-height: 1;
+    pointer-events: none;
+    text-shadow: 0 5px 16px rgba(202, 67, 128, 0.2);
+    animation: heart-drift 8s ease-in-out infinite;
+}
+
+.heart-one {
+    top: 42%;
+    left: 8%;
+    animation-delay: -1s;
+}
+
+.heart-two {
+    top: 65%;
+    left: 20%;
+    color: #f08ab3;
+    animation-delay: -5s;
+}
+
+.heart-three {
+    top: 57%;
+    right: 8%;
+    color: #d94e8d;
+    animation-delay: -3s;
+}
+
+.heart-four {
+    top: 34%;
+    right: 22%;
+    color: #f08ab3;
+    animation-delay: -6s;
+}
+
+.heart-five {
+    top: 77%;
+    right: 35%;
+    font-size: 1.4rem;
+    animation-delay: -2s;
+}
+
+.footer-note {
+    position: absolute;
+    right: 16px;
+    bottom: 18px;
+    left: 16px;
+    margin: 0;
+    color: #a46f89;
+    font-size: 0.78rem;
+    text-align: center;
+}
+
+.footer-note span {
+    color: #dc5d96;
+}
+
+[hidden] {
+    display: none !important;
+}
+
+@keyframes card-appear {
+    from {
+        opacity: 0;
+        transform: translateY(12px);
+    }
+
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+@keyframes twinkle {
+    0%,
+    100% {
+        opacity: 0.55;
+        transform: scale(0.9) rotate(-8deg);
+    }
+
+    50% {
+        opacity: 1;
+        transform: scale(1.12) rotate(8deg);
+    }
+}
+
+@keyframes heart-drift {
+    0%,
+    100% {
+        opacity: 0.45;
+        transform: translate3d(0, 14px, 0) rotate(-12deg) scale(0.9);
+    }
+
+    50% {
+        opacity: 0.95;
+        transform: translate3d(12px, -20px, 0) rotate(12deg) scale(1.12);
+    }
+}
+
+@keyframes heart-beat {
+    0%,
+    100% {
+        transform: scale(1);
+    }
+
+    50% {
+        transform: scale(1.08);
+    }
+}
+
+@media (max-width: 520px) {
+    .page-shell {
+        padding:
+            max(34px, env(safe-area-inset-top))
+            max(16px, env(safe-area-inset-right))
+            max(54px, env(safe-area-inset-bottom))
+            max(16px, env(safe-area-inset-left));
+    }
+
+    .birthday-card {
+        padding: 29px 22px 30px;
+        border-radius: 23px;
+    }
+
+    .intro {
+        margin-bottom: 22px;
+    }
+
+    .sparkle-one {
+        top: 7%;
+        left: 7%;
+    }
+
+    .sparkle-two {
+        top: 11%;
+        right: 7%;
+    }
+
+    .sparkle-three {
+        right: 9%;
+        bottom: 8%;
+    }
+
+    .heart-one {
+        top: 24%;
+        left: 3%;
+    }
+
+    .heart-two {
+        top: 62%;
+        left: 4%;
+    }
+
+    .heart-three {
+        top: 68%;
+        right: 3%;
+    }
+
+    .heart-four {
+        top: 27%;
+        right: 4%;
+    }
+
+    .heart-five {
+        top: 81%;
+        right: 24%;
+    }
+}
+
+@media (prefers-reduced-motion: reduce) {
+    *,
+    *::before,
+    *::after {
+        animation-duration: 0.01ms !important;
+        animation-iteration-count: 1 !important;
+        scroll-behavior: auto !important;
+        transition-duration: 0.01ms !important;
+    }
+}

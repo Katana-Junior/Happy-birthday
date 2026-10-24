@@ -1,0 +1,63 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="theme-color" content="#fff8f5" />
+    <title>A Birthday Surprise for Glady</title>
+    <link rel="stylesheet" href="styles.css" />
+    <script src="index.js" defer></script>
+  </head>
+  <body>
+    <main class="page-shell">
+      <div class="sparkle sparkle-one" aria-hidden="true">✦</div>
+      <div class="sparkle sparkle-two" aria-hidden="true">✧</div>
+      <div class="sparkle sparkle-three" aria-hidden="true">✦</div>
+      <div class="love-heart heart-one" aria-hidden="true">♡</div>
+      <div class="love-heart heart-two" aria-hidden="true">♥</div>
+      <div class="love-heart heart-three" aria-hidden="true">♡</div>
+      <div class="love-heart heart-four" aria-hidden="true">♥</div>
+      <div class="love-heart heart-five" aria-hidden="true">♡</div>
+
+      <section class="birthday-card" aria-labelledby="page-title">
+      <p class="eyebrow">A little birthday surprise</p>
+      <h1 id="page-title">For Glady <span aria-hidden="true">🎂</span></h1>
+
+      <div class="progress-area" aria-live="polite">
+          <span id="question-count">Question 1 of 6</span>
+        </div>
+
+        <div id="question-panel" aria-live="polite">
+          <span
+            class="question-emoji"
+            id="question-emoji"
+            aria-hidden="true"
+          ></span>
+          <h2 id="question-title"></h2>
+          <p class="question-hint">
+            Choose Yes to continue. The No button is a little shy!
+          </p>
+          <div class="answer-list" id="answer-list"></div>
+        </div>
+
+        <div class="result-panel" id="result-panel" hidden aria-live="polite">
+          <div class="poem-reveal" id="poem-reveal">
+            <div class="poem-content">
+              <span class="result-emoji" aria-hidden="true">💐</span>
+              <p class="eyebrow">Your birthday wish</p>
+              <h2>Happy Birthday, Glady!</h2>
+              <p class="result-message" id="result-message"></p>
+              <div class="love-emojis" aria-hidden="true">💖 💕 💗 💓 💞</div>
+            </div>
+            <div class="curtain curtain-left" aria-hidden="true"></div>
+            <div class="curtain curtain-right" aria-hidden="true"></div>
+          </div>
+        </div>
+      </section>
+
+      <p class="footer-note">
+        Made with a little extra birthday love <span aria-hidden="true">♡</span>
+      </p>
+    </main>
+  </body>
+</html>
