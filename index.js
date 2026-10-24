@@ -13,7 +13,7 @@ const questions = [
   },
   {
     emoji: "✨",
-    prompt: "Am I the luckiest person to have you?",
+    prompt: "Am I the luckiest person to have met you?",
   },
   {
     emoji: "🌷",
